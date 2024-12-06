@@ -4,9 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-project("Advent-of-Code")
-
-enable_testing()
+project(aoc2024 VERSION 0.1.0)
 
 find_package(GTest REQUIRED)
 
@@ -15,4 +13,8 @@ include_directories(
     ${GMOCK_INCLUDE_DIRS}
 )
 
-add_subdirectory(day-1)
+add_library(${PROJECT_NAME} src/day1.cpp)
+target_include_directories(${PROJECT_NAME} PUBLIC include)
+
+add_subdirectory(test)
+add_subdirectory(main)

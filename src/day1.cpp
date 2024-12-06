@@ -3,12 +3,7 @@
  * Reading and comparing lists
  */
 
-#include <array>
-#include <fstream>
-#include <iostream>
-#include <ranges>
-#include <tuple>
-#include <vector>
+#include "day1.h"
 
 /**
  * Bubblesort algorithm to sort a vector.

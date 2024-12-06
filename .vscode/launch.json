@@ -5,9 +5,9 @@
             "name": "day1",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/day-1/test_day1",
+            "program": "${workspaceFolder}/build/main/day1",
             "args": [
-                "input"
+                "${workspaceFolder}/main/input/day1.txt"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

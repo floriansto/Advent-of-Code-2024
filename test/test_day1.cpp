@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "day1.cpp"
+#include "day1.h"
 
 TEST(day1, TestMinimalDistance) {
   std::vector<int> first{3, 4, 2, 1, 3, 3};
