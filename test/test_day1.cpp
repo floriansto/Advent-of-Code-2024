@@ -1,8 +1,5 @@
 #include <gtest/gtest.h>
 
-#include <algorithm>
-#include <vector>
-
 #include "day1.h"
 
 TEST(day1, TestMinimalDistance) {
