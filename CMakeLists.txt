@@ -13,7 +13,10 @@ include_directories(
     ${GMOCK_INCLUDE_DIRS}
 )
 
-add_library(${PROJECT_NAME} src/day1.cpp)
+add_library(${PROJECT_NAME}
+            src/day1.cpp
+            src/day2.cpp
+)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 add_subdirectory(test)
