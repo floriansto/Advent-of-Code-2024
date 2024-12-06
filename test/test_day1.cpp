@@ -6,17 +6,19 @@
 #include "day1.h"
 
 TEST(day1, TestMinimalDistance) {
-  std::vector<int> first{3, 4, 2, 1, 3, 3};
-  std::vector<int> second{4, 3, 5, 3, 9, 3};
+  const std::filesystem::path filename =
+      std::filesystem::path(TEST_DATA) / "day1.txt";
+  std::array<std::vector<int>, 2> input = readInput(filename);
 
-  ASSERT_EQ(first.size(), second.size());
-  ASSERT_EQ(11, calculateDistance(first, second));
+  ASSERT_EQ(input[0].size(), input[1].size());
+  ASSERT_EQ(11, calculateDistance(input[0], input[1]));
 }
 
 TEST(day1, TestMinimalSimilarity) {
-  std::vector<int> first{3, 4, 2, 1, 3, 3};
-  std::vector<int> second{4, 3, 5, 3, 9, 3};
+  const std::filesystem::path filename =
+      std::filesystem::path(TEST_DATA) / "day1.txt";
+  std::array<std::vector<int>, 2> input = readInput(filename);
 
-  ASSERT_EQ(first.size(), second.size());
-  ASSERT_EQ(31, calculateSimilarity(first, second));
+  ASSERT_EQ(input[0].size(), input[1].size());
+  ASSERT_EQ(31, calculateSimilarity(input[0], input[1]));
 }
