@@ -13,5 +13,34 @@
  * was faulty
  */
 int main(int argc, char** argv) {
-  return day1(argc, argv);
+  std::array<std::vector<int>, 2> input;
+  int distance;
+  int similarity;
+
+  if (argc == 1) {
+    std::cerr << "Provide the path to the input file!\n";
+    return 1;
+  }
+
+  const std::filesystem::path filename{argv[1]};
+
+  if (!std::filesystem::exists(filename)) {
+    std::cerr << "File " << filename << "does not exist!\n";
+    return 1;
+  }
+
+  input = readInput(filename);
+
+  if (input[0].size() == 0 || input[1].size() == 0) {
+    std::cerr << "No input read from file!\n";
+    return 1;
+  }
+
+  distance = calculateDistance(input[0], input[1]);
+  similarity = calculateSimilarity(input[0], input[1]);
+
+  std::cout << "Minimal distance: " << distance << "\n";
+  std::cout << "Similarity: " << similarity << "\n";
+
+  return 0;
 }
