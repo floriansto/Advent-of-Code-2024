@@ -116,22 +116,19 @@ std::vector<Token> scanInput(std::ifstream& fstream) {
 }
 
 int calculateResult(const std::vector<Token>& tokenList, bool conditionals) {
-  bool doActive{true};
   TokenType nextToken = TokenType::MUL;
   int index{0};
   double result{0.0};
   double numbers[2]{0.0, 0.0};
   for (auto it = begin(tokenList); it != end(tokenList); ++it) {
-    if (!doActive && conditionals) {
+    if (nextToken == TokenType::DO && conditionals) {
       if (it->getType() == TokenType::DO) {
-        doActive = true;
         nextToken = TokenType::MUL;
       }
       continue;
     }
     if (it->getType() == TokenType::DONT) {
-      doActive = false;
-      nextToken = TokenType::MUL;
+      nextToken = TokenType::DO;
       continue;
     }
     if (it->getType() != nextToken) {
