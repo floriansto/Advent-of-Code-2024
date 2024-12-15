@@ -118,5 +118,6 @@ int countReports(const std::filesystem::path& filename, bool dampening) {
       ++safeReports;
     }
   }
+  input.close();
   return safeReports;
 }
