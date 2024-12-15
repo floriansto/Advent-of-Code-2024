@@ -17,6 +17,10 @@ std::string Token::getLexeme() const {
 }
 
 bool isMul(std::ifstream& fstream) {
+  if (fstream.peek() != 'm') {
+    return false;
+  }
+  fstream.get();
   if (fstream.peek() != 'u') {
     return false;
   }
@@ -28,13 +32,35 @@ bool isMul(std::ifstream& fstream) {
   return true;
 }
 
+Token getDoDont(std::ifstream& fstream) {
+  char c;
+  char dont[3]{'n', '\'', 't'};
+  for (int i = 0; i < 3; ++i) {
+    fstream.get(c);
+    if (c != dont[i]) {
+      return Token(TokenType::DO, "do");
+    }
+  }
+  return Token(TokenType::DONT, "don't");
+}
+
+bool isDo(std::ifstream& fstream) {
+  if (fstream.peek() != 'd') {
+    return false;
+  }
+  fstream.get();
+  if (fstream.peek() != 'o') {
+    return false;
+  }
+  fstream.get();
+  return true;
+}
+
 bool isDigit(const char c) {
   return c >= '0' && c <= '9';
 }
 
 Token getNumber(std::ifstream& fstream) {
-  std::streampos start{fstream.tellg()};
-  std::streampos end{fstream.tellg()};
   std::string number{"0"};
   char c;
 
@@ -72,12 +98,15 @@ std::vector<Token> scanInput(std::ifstream& fstream) {
         tokenList.push_back(Token(TokenType::COMMA, ","));
         break;
       default:
-        if (isDigit(c)) {
-          fstream.unget();
+        fstream.unget();
+        if (isDigit(fstream.peek())) {
           tokenList.push_back(getNumber(fstream));
         } else if (isMul(fstream)) {
           tokenList.push_back(Token(TokenType::MUL, "mul"));
+        } else if (isDo(fstream)) {
+          tokenList.push_back(getDoDont(fstream));
         } else {
+          fstream.get();
           tokenList.push_back(Token(TokenType::INVALID, ""));
         }
         break;
@@ -86,12 +115,25 @@ std::vector<Token> scanInput(std::ifstream& fstream) {
   return tokenList;
 }
 
-int calculateResult(const std::vector<Token>& tokenList) {
+int calculateResult(const std::vector<Token>& tokenList, bool conditionals) {
+  bool doActive{true};
   TokenType nextToken = TokenType::MUL;
-  double result{0.0};
   int index{0};
+  double result{0.0};
   double numbers[2]{0.0, 0.0};
   for (auto it = begin(tokenList); it != end(tokenList); ++it) {
+    if (!doActive && conditionals) {
+      if (it->getType() == TokenType::DO) {
+        doActive = true;
+        nextToken = TokenType::MUL;
+      }
+      continue;
+    }
+    if (it->getType() == TokenType::DONT) {
+      doActive = false;
+      nextToken = TokenType::MUL;
+      continue;
+    }
     if (it->getType() != nextToken) {
       nextToken = TokenType::MUL;
       continue;
@@ -127,7 +169,8 @@ int calculateResult(const std::vector<Token>& tokenList) {
   return result;
 }
 
-int sumOfMultiplications(const std::filesystem::path& filename) {
+int sumOfMultiplications(const std::filesystem::path& filename,
+                         bool conditionals) {
   std::ifstream input{filename};
   std::string line;
   std::vector<Token> tokenList;
@@ -139,5 +182,5 @@ int sumOfMultiplications(const std::filesystem::path& filename) {
 
   tokenList = scanInput(input);
   input.close();
-  return calculateResult(tokenList);
+  return calculateResult(tokenList, conditionals);
 }

@@ -13,8 +13,10 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  std::cout << "Sum of all multiplications: " << sumOfMultiplications(filename)
-            << "\n";
+  std::cout << "Sum of all multiplications: "
+            << sumOfMultiplications(filename, false) << "\n";
+  std::cout << "Sum of all multiplications with conditionals: "
+            << sumOfMultiplications(filename, true) << "\n";
 
   return 0;
 }

@@ -11,10 +11,12 @@
  * return the sum.
  *
  * @param filename Path of the file to read
+ * @param contitionals Flag to respect do and don't keywords in the text
  *
  * @return Sum of all multiplications
  */
-int sumOfMultiplications(const std::filesystem::path& filename);
+int sumOfMultiplications(const std::filesystem::path& filename,
+                         bool conditionals);
 
 /**
  * Possible tokens for the scanner
@@ -25,7 +27,9 @@ enum class TokenType {
   COMMA,
   NUMBER,
   MUL,
-  INVALID
+  INVALID,
+  DO,
+  DONT
 };
 
 /**
