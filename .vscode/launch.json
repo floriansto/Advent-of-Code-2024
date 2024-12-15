@@ -2,13 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "day1",
+            "name": "main",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/main/day1",
+            "program": "${workspaceFolder}/build/main/${fileBasenameNoExtension}",
             "args": [
-                "${workspaceFolder}/main/input/day1.txt"
+                "${workspaceFolder}/main/input/${fileBasenameNoExtension}.txt"
             ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/test/aoc2024_Test",
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
