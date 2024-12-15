@@ -16,6 +16,7 @@ include_directories(
 add_library(${PROJECT_NAME}
             src/day1.cpp
             src/day2.cpp
+            src/day3.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
