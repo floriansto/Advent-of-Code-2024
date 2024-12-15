@@ -18,7 +18,9 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  std::cout << "Safe reports: " << countSafeReports(filename) << "\n";
+  std::cout << "Safe reports: " << countReports(filename, false) << "\n";
+  std::cout << "Safe reports with dampening: " << countReports(filename, true)
+            << "\n";
 
   return 0;
 }
