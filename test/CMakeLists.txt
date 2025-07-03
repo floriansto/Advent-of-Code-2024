@@ -6,6 +6,7 @@ add_executable(${TEST_PROJECT}
                test_day1.cpp
                test_day2.cpp
                test_day3.cpp
+               test_day4.cpp
 )
 
 target_link_libraries(${TEST_PROJECT} GTest::gtest_main)
